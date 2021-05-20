@@ -1,2 +1,2 @@
-# react-sumple
+# react-sample
 For studying react
