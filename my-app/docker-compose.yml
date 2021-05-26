@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+ node:
+   build:
+     context: .
+     dockerfile: Dockerfile
+   volumes:
+    - ./:/usr/src/app
+   command: sh -c "yarn && yarn start"
+   ports:
+    - "3000:3000"
