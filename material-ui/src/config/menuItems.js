@@ -154,6 +154,15 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <Tab />,
         },
+        {
+          value: '/my_page',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'my_page',
+            defaultMessage: 'My Page',
+          }),
+          leftIcon: <Tab />,
+        },
       ],
     },
     {

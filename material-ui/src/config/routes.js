@@ -14,6 +14,7 @@ const ToastDemo = lazy(() => import('../pages/ToastDemo/ToastDemo'))
 const FilterDemo = lazy(() => import('../pages/FilterDemo'))
 const ListPageDemo = lazy(() => import('../pages/ListPageDemo'))
 const TabsDemo = lazy(() => import('../pages/TabsDemo'))
+const MyPage = lazy(() => import('../pages/MyPage/MyPage'))
 const MyAccount = lazy(() => import('../pages/MyAccount/MyAccount'))
 
 const routes = [
@@ -33,6 +34,7 @@ const routes = [
   <AuthorizedRoute path="/filter_demo" exact component={FilterDemo} />,
   <AuthorizedRoute path="/list_page_demo" exact component={ListPageDemo} />,
   <AuthorizedRoute path="/tabs_demo" exact component={TabsDemo} />,
+  <AuthorizedRoute path="/my_page" exact component={MyPage} />,
 ]
 
 export default routes
