@@ -11,12 +11,12 @@ import Footer from "./Footer";
 // constants
 import { DRAWER_WIDTH, FOOTER_HEIGHT } from "../utils/constants";
 
+// define css-in-js
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
-      display: "flex",
-      flexDirection: "column",
+      display: "flex", flexDirection: "column",
     },
     content: {
       flexGrow: 1,
@@ -40,3 +40,44 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+// define interface to represent component props
+interface Props {
+  toggleTheme: () => void;
+  useDefaultTheme: boolean;
+  children: ReactNode;
+}
+
+// functional component
+const Layout: FC<Props> = ({ toggleTheme, useDefaultTheme, children }) => {
+  const classes = useStyles();
+  const [open, toggle] = useReducer((open) => !open, true);
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <Header
+        title="My header"
+      />
+      <Navigation
+        title="My navigation"
+      />
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.toolbar} />
+        {children}
+      </main>
+      <footer>
+        <Footer
+          title="footer"
+        />
+      </footer>
+    </div>
+  );
+
+};
+
+export default Layout;
