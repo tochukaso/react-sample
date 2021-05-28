@@ -57,11 +57,12 @@ const Layout: FC<Props> = ({ toggleTheme, useDefaultTheme, children }) => {
     <div className={classes.root}>
       <CssBaseline />
       <Header
-        title="My header"
+        open={open}
+        handleMenuOpen={toggle}
+        toggleTheme={toggleTheme}
+        useDefaultTheme={useDefaultTheme}
       />
-      <Navigation
-        title="My navigation"
-      />
+      <Navigation open={open} handleMenuClose={toggle} />
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

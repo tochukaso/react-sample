@@ -1,32 +1,69 @@
-import React, { useReducer }from 'react';
+import React, { ReactElement, useReducer, FC } from 'react';
+import {
+  createMuiTheme,
+  Theme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 import logo from './logo.svg';
-import Header from './components/Header';
 
 // components
 import Layout from "./components/Layout";
 
+// theme
+import { lightTheme, darkTheme } from "./theme/appTheme";
+
+// constants
+import { APP_TITLE } from "./utils/constants";
+
+// interfaces
+import RouteItem from "./model/RouteItem.model";
+
 import './App.css';
+
+// define app context
+const AppContext = React.createContext(null);
+
+// default component
+const DefaultComponent: FC<{}> = (): ReactElement => (
+  <div>{`No Component Defined.`}</div>
+);
 
 function App() {
   const [useDefaultTheme, toggle] = useReducer((theme) => !theme, true);
 
+  // define custom theme
+  let theme: Theme = createMuiTheme(useDefaultTheme ? lightTheme : darkTheme);
+  theme = responsiveFontSizes(theme);
+
   return (
-    <div className="App">
-         <Layout toggleTheme={toggle} useDefaultTheme={useDefaultTheme}>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <>
+      <Helmet>
+        <title>{APP_TITLE}</title>
+      </Helmet>
+      <AppContext.Provider value={null}>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Switch>
+            <Layout toggleTheme={toggle} useDefaultTheme={useDefaultTheme}>
+              <img src={logo} className="App-logo" alt="logo" />
+              <a
+                className="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn React
         </a>
-        </Layout>
-    </div>
+            </Layout>
+            </Switch>
+          </Router>
+        </ThemeProvider>
+      </AppContext.Provider>
+    </>
   );
 }
 
