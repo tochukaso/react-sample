@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from "@material-ui/core";
 // components
 import Header from "./Header";
 import Navigation from "./Navigation";
+import SubNavigation from "./SubNavigation";
 import Footer from "./Footer";
 
 // constants
@@ -62,13 +63,16 @@ const Layout: FC<Props> = ({ toggleTheme, useDefaultTheme, children }) => {
         toggleTheme={toggleTheme}
         useDefaultTheme={useDefaultTheme}
       />
-      <Navigation open={open} handleMenuClose={toggle} />
+      <Navigation open={open} handleMenuClose={toggle} >
+      </Navigation>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
+
         <div className={classes.toolbar} />
+        <SubNavigation open={true} />
         {children}
       </main>
       <footer>
