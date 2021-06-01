@@ -51,9 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   open: boolean;
   handleMenuClose: () => void;
+  handleSubMenuClose: React.Dispatch<boolean>;
 }
 
-const Navigation: FC<Props> = ({ open, handleMenuClose }): ReactElement => {
+const Navigation: FC<Props> = ({ open, handleMenuClose, handleSubMenuClose }): ReactElement => {
   const classes = useStyles();
   return (
     <>
@@ -75,7 +76,7 @@ const Navigation: FC<Props> = ({ open, handleMenuClose }): ReactElement => {
             <ChevronLeftIcon htmlColor="#fff" />
           </IconButton>
         </div>
-        <AppMenu />
+        <AppMenu handleSubMenuClose={handleSubMenuClose}/>
       </Drawer>
     </>
   );

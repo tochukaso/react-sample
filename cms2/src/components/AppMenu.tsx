@@ -42,8 +42,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface Props {
+  handleSubMenuClose: React.Dispatch<boolean>;
+}
+
 // functional component
-const Menu: FC<{}> = (): ReactElement => {
+const Menu: FC<Props> = ({handleSubMenuClose}): ReactElement => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const location: any = useLocation();
@@ -75,10 +79,10 @@ const Menu: FC<{}> = (): ReactElement => {
                     <ExpandLess />
                   </Tooltip>
                 ) : (
-                    <Tooltip title="Expand" placement="bottom">
-                      <ExpandMore />
-                    </Tooltip>
-                  )}
+                  <Tooltip title="Expand" placement="bottom">
+                    <ExpandMore />
+                  </Tooltip>
+                )}
               </ListItem>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List className={classes.nested}>
@@ -92,23 +96,27 @@ const Menu: FC<{}> = (): ReactElement => {
                       enabled={sRoute.enabled}
                       component={sRoute.component}
                       subRoutes={sRoute.subRoutes}
+                      isOpenSubMenu={sRoute.isOpenSubMenu}
+                      handleFunction={handleSubMenuClose}
                     />
                   ))}
                 </List>
               </Collapse>
             </>
           ) : (
-              <MenuItem
-                key={`${route.key}`}
-                title={route.title}
-                icon={route.icon}
-                tooltip={route.tooltip}
-                path={route.path}
-                enabled={route.enabled}
-                component={route.component}
-                subRoutes={route.subRoutes}
-              />
-            )}
+            <MenuItem
+              key={`${route.key}`}
+              title={route.title}
+              icon={route.icon}
+              tooltip={route.tooltip}
+              path={route.path}
+              enabled={route.enabled}
+              component={route.component}
+              subRoutes={route.subRoutes}
+              isOpenSubMenu={route.isOpenSubMenu}
+              handleFunction={handleSubMenuClose}
+            />
+          )}
           {route.appendDivider && <Divider className={classes.divider} />}
         </>
       ))}

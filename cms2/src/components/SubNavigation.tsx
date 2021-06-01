@@ -56,34 +56,36 @@ const SubNavigation: FC<Props> = ({ open }): ReactElement => {
   ]
   return (
     <>
-      <List
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          root: clsx({
+      {open &&
+        <List
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        {parts.map((p) => (
+          })}
+          classes={{
+            root: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          {parts.map((p) => (
 
-          <ListItem button key={p.name}>
-            <ListItemIcon>
-              <IconButton
-                size='small'
-              >
-                <Icon component={p.icon} />
-              </IconButton>
-            </ListItemIcon>
+            <ListItem button key={p.name}>
+              <ListItemIcon>
+                <IconButton
+                  size='small'
+                >
+                  <Icon component={p.icon} />
+                </IconButton>
+              </ListItemIcon>
 
-            <ListItemText primary={p.name} />
+              <ListItemText primary={p.name} />
 
-          </ListItem>
-        ))}
-      </List>
+            </ListItem>
+          ))}
+        </List>
+      }
     </>
   );
 };

@@ -55,7 +55,7 @@ const MenuItem: FC<RouteItem> = (route: RouteItem): ReactElement => {
         })}
       >
         <Tooltip title={route.tooltip || ""} placement="right">
-          <ListItem button disabled={!route.enabled}>
+          <ListItem button disabled={!route.enabled} onClick={() => route.handleFunction(route.isOpenSubMenu)}>
             <ListItemIcon>
               <IconButton
                 className={clsx({

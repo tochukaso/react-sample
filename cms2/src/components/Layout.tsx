@@ -1,7 +1,15 @@
-import React, {FC, ReactNode, useReducer } from "react";
+import React, { FC, ReactNode, useReducer } from "react";
 import clsx from "clsx";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import {
+  DraggableProvided,
+  DroppableProvided,
+  DropResult,
+  Draggable,
+  Droppable,
+  DragDropContext,
+} from 'react-beautiful-dnd'
 
 // components
 import Header from "./Header";
@@ -54,6 +62,15 @@ const Layout: FC<Props> = ({ toggleTheme, useDefaultTheme, children }) => {
   const classes = useStyles();
   const [open, toggle] = useReducer((open) => !open, true);
 
+  const reducer = (state: boolean, isOpen: boolean) => {
+    return isOpen;
+  }
+  const [subOpen, subToggle] = useReducer(reducer, false);
+
+  const dndHandler = (result: DropResult) => {
+
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -63,8 +80,9 @@ const Layout: FC<Props> = ({ toggleTheme, useDefaultTheme, children }) => {
         toggleTheme={toggleTheme}
         useDefaultTheme={useDefaultTheme}
       />
-      <Navigation open={open} handleMenuClose={toggle} >
+      <Navigation open={open} handleMenuClose={toggle} handleSubMenuClose={subToggle} >
       </Navigation>
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
@@ -72,7 +90,7 @@ const Layout: FC<Props> = ({ toggleTheme, useDefaultTheme, children }) => {
       >
 
         <div className={classes.toolbar} />
-        <SubNavigation open={true} />
+        <SubNavigation open={subOpen} />
         {children}
       </main>
       <footer>

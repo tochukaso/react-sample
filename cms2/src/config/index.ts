@@ -19,7 +19,9 @@ export const routes: Array<RouteItem> = [
         enabled: true,
         component: Home,
         icon: HomeIcon,
-        appendDivider: true
+        appendDivider: true,
+        isOpenSubMenu: false,
+        handleFunction: ():void => console.log("home")
     },
     {
         key: "router-parts",
@@ -29,6 +31,8 @@ export const routes: Array<RouteItem> = [
         enabled: true,
         component: Parts,
         icon: PartsIcon,
-        appendDivider: true
+        appendDivider: true,
+        isOpenSubMenu: true,
+        handleFunction: ():void => alert('clicked parts')
     },
 ]

@@ -1,4 +1,4 @@
-import { ComponentType, FC } from "react";
+import React, { ComponentType, FC } from "react";
 
 // RouteItem is an interface for defining the application routes and navigation menu items
 interface RouteItem {
@@ -10,7 +10,9 @@ interface RouteItem {
     enabled: boolean
     icon?: ComponentType
     subRoutes?: Array<RouteItem>
-    appendDivider?: boolean
+    appendDivider?: boolean,
+    isOpenSubMenu: boolean,
+    handleFunction: React.Dispatch<boolean>,
 }
 
 export default RouteItem;
